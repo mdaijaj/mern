@@ -1,0 +1,219 @@
+
+@media screen and (min-width: 1024px)
+.container {
+    max-width: 1200px;
+}
+
+@media screen and (max-width: 1200px)
+.container {
+    width: calc( 100% - 30px);
+    max-width: 100%;
+}
+
+.signup-content {
+  padding: 75px 0px;
+  margin-top: 70px;
+}
+.signup{
+  margin-bottom: 100px;
+}
+
+display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+  display: flex;
+  display: -webkit-flex; 
+}
+
+
+
+div {
+  display: block;
+}
+body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #222;
+  background: #f8f8f8;
+  font-weight: 400;
+  font-family: Poppins;
+}
+
+.signup-form{
+  margin-left: 75px;
+  margin-right: 75px;
+  padding-left: 34px;
+}
+
+.form-title{
+  margin-bottom: 33px;
+  font-size: 45px;
+  color: black;
+}
+
+.h2{
+    line-height: 1.66;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #222;
+    font-family: Poppins;
+    font-size: 36px;
+}
+
+.container {
+  width: 900px;
+  background: #fff;
+  margin: 0 auto;
+  box-shadow: 0px 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+  -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 15px 16.83px 0.17px rgb(0 0 0 / 5%);
+  -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -o-border-radius: 20px;
+  -ms-border-radius: 20px;
+}
+.register-form {
+  width: 100%;
+}
+.form-group {
+  position: relative;
+  /* margin-bottom: 10px; */
+  overflow: hidden;
+}
+
+.signup-image{
+  margin-top: 45px;
+  margin: 0 55px;
+}
+
+.form-submit {
+  display: inline-block;
+  background: #6dabe4;
+  color: #fff;
+  border-bottom: none;
+  width: auto;
+  padding: 15px 39px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  margin-top: 25px;
+  cursor: pointer;
+}
+input {
+  width: 100%;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #999;
+  padding: 6px 30px;
+  font-family: Poppins;
+  box-sizing: border-box;
+}
+input, select, textarea {
+  outline: none;
+  appearance: unset!important;
+  -moz-appearance: unset!important;
+  -webkit-appearance: unset!important;
+  -o-appearance: unset!important;
+  -ms-appearance: unset!important;
+}
+user agent stylesheet
+input[type="submit" i] {
+  appearance: auto;
+  user-select: none;
+  white-space: pre;
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: -internal-light-dark(black, white);
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  box-sizing: border-box;
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+user agent stylesheet
+input {
+  -webkit-writing-mode: horizontal-tb !important;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+  -webkit-rtl-ordering: logical;
+  cursor: text;
+  margin: 0em;
+  font: 400 13.3333px Arial;
+  padding: 1px 2px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #222;
+  background: #f8f8f8;
+  font-weight: 400;
+  font-family: Poppins;
+}
+
+.form{
+  display: block;
+    margin-top: 0em;
+}
+
+
+/* login */
+.signin-content {
+  padding-top: 67px;
+  padding-bottom: 87px;
+}
+
+
+.signin-form{
+  margin-left: 75px;
+ margin-right: 75px;
+ padding-left: 34px;
+}
+.signin-image{
+    margin-left: 110px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+.social-login {
+    align-items: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center;
+    margin-top: 80px;
+}
+
+.social-label {
+  display: inline-block;
+  margin-right: 15px;
+}
+/* .list-type-ulli, .socials {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+} */
+
+.container{
+  padding: 50px;
+  margin-top: 40px;
+}
