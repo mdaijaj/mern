@@ -1,69 +1,87 @@
-const Bcrypt=require('bcrypt');
+const Bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const User= require('../models/index');
 
 
 const signup= async (req,res)=>{
     try{
-        console.log("api is working...........")
         const {
             name,
             email,
             phone,
-            professional
-        }= req.body;
-        const password= Bcrypt.hashSync(req.body.password, 10)
-        const obj = new User({
-            name,
-            email,
-            phone,
             professional,
-            password: password,
-        });
-        if(!name || !email || !phone || !professional || !password){
+            password,
+            confirm_password
+        }= req.body;
+
+        if(!name || !email || !phone || !professional || !password || !confirm_password){
             console.log("please fill all fields");
-            res.status(422).send({status:"please fill all fields" })
         }
-        const result=await obj.save();
-        if(result){
-            console.log("user insert successfully!")
-            res.send({message:"user insert success", data: result})
+
+    
+        const userExits= await User.findOne({email: email});
+        if(userExits){
+            res.send("email is already exits in your db...")
         }
+
+        const user= new User({name, email, phone, professional, password, confirm_password})
+        await user.save();
+        res.status(200).send("inserted data success")
     }
     catch(err){
-        console.log(err.message);
-        res.send("This mail already exists please login.............");
+        console.log("This mail already exists please login.............");
     }
 }
 
 
 const login=async (req,res)=>{
     try{
-        const mail= await User.findOne({email: req.body.email}).exec()
+        const {email, password}=req.body;
+        if(!email || !password){
+            res.status(400).send("please fill the data...")
+        }
+        const mail= await User.findOne({email: email})
+
+        // console.log("mail", mail)
         if(mail){
-            if(Bcrypt.compareSync(req.body.password, mail.password)){
-                console.log("encrypted password match success!")
-                var token =await jwt.sign({ user_detail: mail }, "aijajkhan", {expiresIn: 86400 }); // expires in 24 hours
-                // var token= jwt.sign({mail})
-                console.log(token)
-                res.cookie('token', token, {
-                    expiresIn: '300000', 
-                    httpOnly: true
-                });
+            const isMatch=await Bcrypt.compare(password, mail.password);
+            console.log("encrypted password match success!")
+            // let token =await jwt.sign({ user_detail: mail }, "aijajkhan", {expiresIn: 86400 }); // expires in 24 hours
+            token= await mail.generateAuthToken();
+            // console.log("token", token)
+
+            res.cookie('token', token, {
+                expires: new Date(Date.now() + 300000000),
+                secure: false, // set to true if your using https
+                httpOnly: true,
+              });
+
+            // res.cookie("jwtToken", token, {
+            //     expires: new Date(Date.now()+ 300000000),
+            //     httpOnly: true
+            // });
+            if(!isMatch){
+                res.status(400).send({error: "Invalid Credentials"})
+            }else{
                 res.send({
                     token: token,
-                    user_detail: mail
+                    user_detail: mail,
+                    message: "login Success"
                 })
             }
         }else{
-            console.log("Email is not found")
-            res.status(401).send("Email is not found.......")
-        }
+            res.status(400).send({error: "mail not found"})
+        }     
     }
     catch(err){
         console.log(err.message)
-        res.send(err.message)
+        res.send("there is problem to login...")
     } 
+}
+
+const home= async (req,res)=>{
+    console.log("hello about page...")
+    res.send(req.userRouter);
 }
 
 const feedback= async(req,res)=>{
@@ -80,6 +98,28 @@ const feedback= async(req,res)=>{
 }
 
 
+const contact=async (req,res)=>{
+    try{
+        const {name, email, phone, message}=req.body;
+        if(!message || !name || !email|| !phone){
+            console.log("please fill all fields");
+            return res.send("please fill all fields")
+        }
+
+        const userContact=await User.findOne({_id: req.UserId})
+        if(userContact){
+            const userMessage= await userContact.addMessage(name, email, phone, message);
+            await userContact.save();
+            return res.status(201).send({message: "user message success!"}) 
+        }
+    }
+    catch(err){
+        console.log(err.message)
+        res.status(400).send("error contact page")
+    }
+}
+
+
 // const about=(req,res)=>{
 //     console.log("hello about page")
 //     res.send(req.root)
@@ -90,6 +130,8 @@ module.exports={
     signup,
     login,
     feedback,
+    contact,
+    home
     // about
 }
 

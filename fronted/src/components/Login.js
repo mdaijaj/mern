@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import image from '../images/login.jpg'
+import image from '../images/kingkhan.jpg'
 import {useHistory, NavLink} from 'react-router-dom'
 
 
 const Login=()=>{
 
     const history=useHistory();
+    
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     // console.log("aijaj", email, password)
@@ -22,13 +23,14 @@ const Login=()=>{
         })
 
         const data= res.json();
+        
         if(data.status==400|| !data){
             window.alert("data not found")
             console.log("data not found")
         }else{
             window.alert("Login data successfully!")
             console.log("login success")
-            history.push("/")
+            history.push("/home")
         }
     }
 
@@ -39,7 +41,7 @@ const Login=()=>{
                 <div class="signin-content">
 
                     <div class="signin-image">
-                        <figure><img src={image} alt="sing up image" /></figure>
+                        <figure><img src={image} alt="sing up image" height="300px" width="250px" /></figure>
                         <a href="/signup" class="signup-image-link">Create an account</a>
                     </div>
 

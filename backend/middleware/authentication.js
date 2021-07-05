@@ -2,16 +2,22 @@ const jwt= require('jsonwebtoken');
 const User= require('../models/index');
 
 const authenticate= async(req,res,next)=>{
+    const token=req.cookies.token;
     try{
-        const token=req.headers.authorization.split(' ')[1];
-        // console.log(token)
-        if (token == null) return res.sendStatus(401)
-        const verifyToken=await jwt.verify(token, "aijajkhan");
-        console.log("verifyToken,", verifyToken)
-        const userRouter= await User.findOne({_id: verifyToken.user_detail._id, 'token': token})
-        if(!userRouter){ throw new Error("User not found.")}
-        req.userRouter= userRouter._id;
-        next();
+        if(token){
+            const verifyToken=await jwt.verify(token, "aijajkhan");
+            console.log("verifyToken,", verifyToken)
+            
+            const userRouter= await User.findOne({_id: verifyToken._id, 'tokens.token': token})
+            if(!userRouter){ throw new Error("User not found.")}
+
+            // req.token=token;
+            req.userRouter= userRouter;
+            req.UserId=userRouter._id
+            next();
+        }else{
+            return res.status(401).send('/')        
+        }
     }catch(err){
         console.log(err.message)
         res.status(401).send("Unauthorized: no token provide")

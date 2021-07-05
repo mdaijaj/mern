@@ -1,25 +1,31 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import image from '../images/login.jpg'
 import {useHistory} from 'react-router-dom'
 
 const About=()=>{
-
     const history= useHistory();
+    const [userData, setUserData] = useState(' ');
+
     const callAboutPage= async ()=>{
         try{
             const res= await fetch('/about', {
-                method: "Get",
+                method: "GET",
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json" 
+                    "Content-Type": "application/json" ,
                 },
                 credentials: "include" 
-            })
-            if(!res.status==200){
+            });
+            
+            const data= await res.json();
+            console.log("data...", data);
+            setUserData(data);
+
+            
+            if(!data.status==200){
+                console.log("invalid status.......")
                 const error=new Error(res.error);
             }
-            const data= await res.json();
-            console.log(data);
         }
         catch(err){
             console.log(err.message)
@@ -27,15 +33,15 @@ const About=()=>{
         }
     }
 
-    useEffect((err,data)=>{
-        callAboutPage()
+    useEffect(()=>{
+        callAboutPage();
     }, []);
 
 
     return (
         <>
         <div className="container">
-            <form method="Get">
+            <form method="GET">
                 <div className="row">
                     <div className="col-md-4">
                         <div className="image-profile">
@@ -45,8 +51,8 @@ const About=()=>{
 
                     <div className="col-md-6">
                         <div className="profile-head">
-                            <h4>Md Aijaj Khan</h4>
-                            <h5>Software Engineer</h5>
+                            <h4>{userData.name}</h4>
+                            <h5>{userData.professional}</h5>
                             <p className="profile-rating mt-3 mb-5">Rankings <span>1/10</span> </p>
                             
                             
@@ -93,7 +99,7 @@ const About=()=>{
                                         <label >UserId</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <p>9756321441</p>   
+                                        <p>{userData._id}</p>   
                                     </div>
                                 </div>
 
@@ -102,7 +108,7 @@ const About=()=>{
                                         <label >Name</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <p>King khan</p>   
+                                        <p>{userData.name}</p>   
                                     </div>
                                 </div>
 
@@ -111,16 +117,16 @@ const About=()=>{
                                         <label >Email</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <p>aijaj535@gmail.com</p>   
+                                        <p>{userData.email}</p>   
                                     </div>
                                 </div>
-                                About
+                                
                                 </div> <div className="row">
                                     <div className="col-md-6">
                                         <label >Phone</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <p>9756321441</p>   
+                                        <p>{userData.phone}</p>   
                                     </div>
                                 </div>
 
@@ -129,7 +135,7 @@ const About=()=>{
                                         <label >Professional</label>
                                     </div>
                                     <div className="col-md-6">
-                                        <p>Software Engineer</p>   
+                                        <p>{userData.professional}</p>   
                                     </div>
                                 </div>
                             </div>
