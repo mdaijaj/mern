@@ -15,7 +15,7 @@ const App=()=>{
       <Navbar/>
       <Switch>
       {/* <app></app> */}
-        <Route exact path="/">
+        <Route  path="/home">
           <Home/>
         </Route>
 
@@ -36,7 +36,7 @@ const App=()=>{
         </Route>
 
         <Route>
-          <Errorpage/>
+          <Errorpage />
         </Route>
       </Switch>
       </>

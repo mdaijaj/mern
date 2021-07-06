@@ -119,11 +119,10 @@ const contact=async (req,res)=>{
     }
 }
 
-
-// const about=(req,res)=>{
-//     console.log("hello about page")
-//     res.send(req.root)
-// }
+const about= async(req,res)=>{
+    console.log("about page open");
+    res.send(req.userRouter);
+}
 
 
 module.exports={
@@ -131,8 +130,8 @@ module.exports={
     login,
     feedback,
     contact,
-    home
-    // about
+    home,
+    about
 }
 
 
