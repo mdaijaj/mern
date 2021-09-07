@@ -22,8 +22,8 @@ const Login=()=>{
             body: JSON.stringify({email, password})
         })
 
-        const data= res.json();
-        
+        const data= await res.json();
+        console.log("data", data)
         if(data.status==400|| !data){
             window.alert("data not found")
             console.log("data not found")

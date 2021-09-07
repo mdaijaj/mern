@@ -24,7 +24,7 @@ const Navbar=()=>{
                     <NavLink className="nav-link" to="/login">Login <span className="sr-only"></span></NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/register">Register</NavLink>
+                    <NavLink className="nav-link" to="/signup">Register</NavLink>
                 </li>
                 <li className="nav-item dropdown">
                     <NavLink className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

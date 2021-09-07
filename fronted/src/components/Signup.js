@@ -6,15 +6,14 @@ import image from '../images/signupImg.jpg';
 
 
 const Signup=()=>{
-
     const history= useHistory();
     const [user, setUser]= useState({
-        name:"", 
-        email:"", 
-        phone:"", 
-        professional:"", 
-        password:"", 
-        confirm_password:""
+        name: "", 
+        email: "", 
+        phone: "", 
+        professional: "", 
+        password: "", 
+        confirm_password : ""
     });
 
     let name, value;
@@ -32,17 +31,18 @@ const Signup=()=>{
         const res= await fetch('/signup', {
             method: "Post",
             headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "X-Requested-With",
+                // "Access-Control-Allow-Origin": "*",
+                // "Access-Control-Allow-Headers": "X-Requested-With",
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 name, email, phone, professional, password, confirm_password
-            })
+            }),
+            credentials: "include"
         })
         console.log("res", res)
         // const data= await res.json();
-        console.log("data", res)
+        // console.log("data", res)
         if(res.status===400 || !res){
             window.alert("Invalid Registration");
             console.log("Invalid Registration")
@@ -52,8 +52,7 @@ const Signup=()=>{
             console.log("Registration is successfully")
             history.push('/login')
         }
-    }       
-    
+    }
 
     return (
         <>

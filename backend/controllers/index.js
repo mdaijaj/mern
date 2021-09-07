@@ -1,8 +1,6 @@
 const Bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const User= require('../models/index');
-
-
 const signup= async (req,res)=>{
     try{
         const {
@@ -13,53 +11,54 @@ const signup= async (req,res)=>{
             password,
             confirm_password
         }= req.body;
-
         if(!name || !email || !phone || !professional || !password || !confirm_password){
             console.log("please fill all fields");
         }
 
-    
-        const userExits= await User.findOne({email: email});
+        console.log(req.body)
+        const userExits= await User.find({email: email}).exec()
         if(userExits){
-            res.send("email is already exits in your db...")
+            console.log("userExits", userExits)
+            // res.send("email is already exits in your db...")
         }
 
         const user= new User({name, email, phone, professional, password, confirm_password})
+        // console.log("user...", user)
         await user.save();
-        res.status(200).send("inserted data success")
+        res.status(200).send({message:"inserted data success"});
     }
     catch(err){
+        console.log(err.message)
         console.log("This mail already exists please login.............");
     }
 }
 
 
-const login=async (req,res)=>{
+const login= async (req,res)=>{
     try{
         const {email, password}=req.body;
         if(!email || !password){
-            res.status(400).send("please fill the data...")
+            res.status(400).send("please fill the data...");
         }
         const mail= await User.findOne({email: email})
-
-        // console.log("mail", mail)
+        console.log("mail", mail)
         if(mail){
             const isMatch=await Bcrypt.compare(password, mail.password);
             console.log("encrypted password match success!")
             // let token =await jwt.sign({ user_detail: mail }, "aijajkhan", {expiresIn: 86400 }); // expires in 24 hours
-            token= await mail.generateAuthToken();
-            // console.log("token", token)
+            let token= await mail.generateAuthToken();
+            console.log("token.....", token)
 
-            res.cookie('token', token, {
-                expires: new Date(Date.now() + 300000000),
-                secure: false, // set to true if your using https
-                httpOnly: true,
-              });
+            // res.cookie('token', token, {
+            //     expires: new Date(Date.now() + 300000000),
+            //     secure: false, // set to true if your using https
+            //     httpOnly: true,
+            //   });
 
-            // res.cookie("jwtToken", token, {
-            //     expires: new Date(Date.now()+ 300000000),
-            //     httpOnly: true
-            // });
+            res.cookie("jwtToken", token, {
+                expires: new Date(Date.now()+ 300000000),
+                httpOnly: true
+            });
             if(!isMatch){
                 res.status(400).send({error: "Invalid Credentials"})
             }else{
@@ -70,7 +69,7 @@ const login=async (req,res)=>{
                 })
             }
         }else{
-            res.status(400).send({error: "mail not found"})
+            res.status(400).send({error: "email not found"})
         }     
     }
     catch(err){
@@ -88,8 +87,8 @@ const feedback= async(req,res)=>{
     try{
         const obj = new Feedback(req.body);
         const result=await obj.save();
-        console.log("feedback insert successfully!")
-        res.send("feedback sent successfully!")
+        console.log("feedback insert successfully!");
+        res.send("feedback sent successfully!");
     }
     catch(err){
         console.log(err.message)
@@ -102,8 +101,8 @@ const contact=async (req,res)=>{
     try{
         const {name, email, phone, message}=req.body;
         if(!message || !name || !email|| !phone){
-            console.log("please fill all fields");
-            return res.send("please fill all fields")
+            console.log("please fill all fields...");
+            return res.send("please fill all fields");
         }
 
         const userContact=await User.findOne({_id: req.UserId})

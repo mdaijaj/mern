@@ -15,7 +15,7 @@ const App=()=>{
       <Navbar/>
       <Switch>
       {/* <app></app> */}
-        <Route  path="/home">
+        <Route exact path="/home">
           <Home/>
         </Route>
 
@@ -31,7 +31,7 @@ const App=()=>{
           <Login/>
         </Route>
 
-        <Route path="/register">
+        <Route path="/signup">
           <Signup/>
         </Route>
 

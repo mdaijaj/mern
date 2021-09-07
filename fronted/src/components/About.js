@@ -16,12 +16,9 @@ const About=()=>{
                 },
                 credentials: "include" 
             });
-            
             const data= await res.json();
             console.log("data...", data);
             setUserData(data);
-
-            
             if(!data.status==200){
                 console.log("invalid status.......")
                 const error=new Error(res.error);
@@ -32,11 +29,10 @@ const About=()=>{
             history.push('/login')
         }
     }
-
+    
     useEffect(()=>{
         callAboutPage();
     }, []);
-
 
     return (
         <>
@@ -72,7 +68,6 @@ const About=()=>{
                     </div>
                 </div>
 
-
                 <div className="row">
                     {/* left side url */}
                     <div className="col-md-4">
@@ -86,10 +81,7 @@ const About=()=>{
                         </div>
                     </div> 
 
-
-
                     {/* right side panel */}
-
                     <div className="col-md-8 pl-5 about-info">
                         <div className="tab-content profile-tab" id="myTabContent">
                             <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -177,7 +169,6 @@ const About=()=>{
                                         <p>English and Hindi</p>   
                                     </div>
                                 </div>
-
                             </div>
                         </div>
             </form>
