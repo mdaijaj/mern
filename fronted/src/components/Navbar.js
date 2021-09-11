@@ -40,6 +40,9 @@ const Navbar=()=>{
                 <li className="nav-item active">
                     <NavLink className="nav-link" to="/contact">Contact <span className="sr-only"></span></NavLink>
                 </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="/logout">Logout</NavLink>
+                </li>
             </ul>
         </div>
     </nav>

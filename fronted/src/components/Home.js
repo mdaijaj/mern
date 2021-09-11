@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 
-const Home=()=>{
+const Home= ()=>{
 
     const [userName, setUsername] = useState(" ");
     const [show, setShow] = useState(false);
     const userHomepage= async()=>{
         try{
             const res= await fetch('/home', {
-                method: "Get",
+                method: "GET",
                 headers: {
                     "Content-Type": "application/json" ,
                 }
             });
-            console.log(res)
             const data= await res.json();
             console.log("data...", data);
             setUsername(data.name)

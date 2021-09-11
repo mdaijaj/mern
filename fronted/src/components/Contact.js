@@ -2,13 +2,35 @@
 import React, {useState, useEffect, useImperativeHandle} from 'react';
 
 const Contact=()=>{
+    const [userData, setUserData] = useState("");
 
-    const [userData, setUserData] = useState({name: "", email:"", phone: "", message: ""});
+    const contactUser= async ()=>{
+        try{
+            const res= await fetch('/contactData', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json" ,
+                },
+            });
+            const data= await res.json();
+            console.log("data...", data);
+            setUserData(data);
+            if(!data.status==200){
+                console.log("invalid status.......")
+                const error=new Error(res.error);
+            }
+        }
+        catch(err){
+            console.log(err.message)
+            // history.push('/login')
+        }
+    }
+    
 
-    const callAboutPage= async ()=>{
+    const ContactPage= async ()=>{
         try{
             const res= await fetch('/contact', {
-                method: "POST",
+                method: "Get",
                 headers: {
                     "Content-Type": "application/json" ,
                 }
@@ -17,8 +39,6 @@ const Contact=()=>{
             const data= await res.json();
             console.log("data...", data);
             setUserData({...data, name: data.name, email: data.email, message: data.message});
-
-            
             if(!data.status==200){
                 console.log("invalid status.......")
                 const error=new Error(res.error);
@@ -31,14 +51,15 @@ const Contact=()=>{
     }
 
     useEffect(()=>{
-        callAboutPage();
+        // ContactPage();
+        contactUser()
     }, []);
 
     const handleInput=(e)=>{
         const name= e.target.name
         const value= e.target.value
 
-        setUserData({... userData, [name]: value })
+        setUserData({...userData, [name]: value })
         // setUserData({... userData, name: userData.name, email: userData.email, phone: userData.phone, message: userData.message })
 
     }

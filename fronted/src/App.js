@@ -6,6 +6,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Logout from './components/Logout';
 import Errorpage from './components/Error';
 import 'bootstrap/dist/css/bootstrap.css'
 
@@ -33,6 +34,10 @@ const App=()=>{
 
         <Route path="/signup">
           <Signup/>
+        </Route>
+
+        <Route path="/logout">
+          <Logout/>
         </Route>
 
         <Route>

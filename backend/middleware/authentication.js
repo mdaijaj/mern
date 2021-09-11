@@ -11,6 +11,7 @@ const authenticate= async(req,res,next)=>{
             console.log("verifyToken,", verifyToken)
             
             const userRouter= await User.findOne({_id: verifyToken._id, 'tokens.token': token})
+            // console.log("userRouter", userRouter)
             if(!userRouter){ throw new Error("User not found.")}
 
             req.token=token;

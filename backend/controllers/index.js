@@ -41,7 +41,7 @@ const login= async (req,res)=>{
             res.status(400).send("please fill the data...");
         }
         const mail= await User.findOne({email: email})
-        console.log("mail", mail)
+        // console.log("mail", mail)
         if(mail){
             const isMatch=await Bcrypt.compare(password, mail.password);
             console.log("encrypted password match success!")
@@ -78,11 +78,6 @@ const login= async (req,res)=>{
     } 
 }
 
-const home= async (req,res)=>{
-    console.log("hello about page...")
-    res.send(req.userRouter);
-}
-
 const feedback= async(req,res)=>{
     try{
         const obj = new Feedback(req.body);
@@ -100,12 +95,13 @@ const feedback= async(req,res)=>{
 const contact=async (req,res)=>{
     try{
         const {name, email, phone, message}=req.body;
-        if(!message || !name || !email|| !phone){
-            console.log("please fill all fields...");
-            return res.send("please fill all fields");
+        if(!name || !email || !phone || message){
+            console.log("user fill all fields")
+            return res.status(401).send("your fill all fields")
         }
-
         const userContact=await User.findOne({_id: req.UserId})
+
+        console.log("userContact", userContact)
         if(userContact){
             const userMessage= await userContact.addMessage(name, email, phone, message);
             await userContact.save();
@@ -123,6 +119,24 @@ const about= async(req,res)=>{
     res.send(req.userRouter);
 }
 
+const contactData= async(req,res)=>{
+    console.log("about page open");
+    res.send(req.userRouter);
+}
+
+const home= async(req,res)=>{
+    console.log("hello about page...")
+    res.send(req.userRouter);
+}
+
+
+const logout= async(req,res)=>{
+    // console.log("hello logout page...")
+    res.clearCookie("jwToken", {path: '/'})
+    console.log("logout")
+    res.status(200).send("user logout");
+}
+
 
 module.exports={
     signup,
@@ -130,7 +144,9 @@ module.exports={
     feedback,
     contact,
     home,
-    about
+    about,
+    contactData,
+    logout
 }
 
 

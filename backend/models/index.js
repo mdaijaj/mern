@@ -28,6 +28,10 @@ let userSchema=  new Schema({
     confirm_password: {
         type: String,
     },
+    date: {
+        type: Date,
+        default: Date.now
+    },
     messages: [
         {
              name: {
@@ -73,6 +77,7 @@ userSchema.pre("save", async function (next){
 userSchema.methods.generateAuthToken= async function(){
     try{
         let token=jwt.sign({_id: this._id}, "aijajkhan");
+        console.log("token", token)
         this.tokens= this.tokens.concat({token: token});
         // console.log("token", this.tokens)
         await this.save();
