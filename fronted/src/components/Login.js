@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import image from '../images/kingkhan.jpg'
 import {useHistory, NavLink} from 'react-router-dom'
-
+import { userContext } from '../App';
 
 const Login=()=>{
 
+    const {state, dispatch} = useContext(userContext);
     const history=useHistory();
-    
     const [email, setEmail]= useState('');
     const [password, setPassword]= useState('');
     // console.log("aijaj", email, password)
@@ -24,10 +24,11 @@ const Login=()=>{
 
         const data= await res.json();
         console.log("data", data)
-        if(data.status==400|| !data){
+        if(data.status===400|| !data){
             window.alert("data not found")
             console.log("data not found")
         }else{
+            dispatch({type: "USER", payload: true})
             window.alert("Login data successfully!")
             console.log("login success")
             history.push("/home")

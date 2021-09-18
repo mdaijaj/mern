@@ -92,7 +92,7 @@ const feedback= async(req,res)=>{
 }
 
 
-const contact=async (req,res)=>{
+const contact= async (req,res)=>{
     try{
         const {name, email, phone, message}=req.body;
         if(!name || !email || !phone || message){
@@ -131,9 +131,8 @@ const home= async(req,res)=>{
 
 
 const logout= async(req,res)=>{
-    // console.log("hello logout page...")
-    res.clearCookie("jwToken", {path: '/'})
     console.log("logout")
+    res.clearCookie("jwtToken", {path: '/'})
     res.status(200).send("user logout");
 }
 

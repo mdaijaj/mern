@@ -14,10 +14,10 @@ app.use(express.static(__dirname));
 let user=require('./routes/index')
 app.use('/', user.router)
 
-app.get('/', (req, res)=>{
-    console.log("api is working .........")
-    res.send("dk boss")
-})
+// app.get('/', (req, res)=>{
+//     console.log("api is working .........")
+//     res.send("dk boss")
+// })
 
 var port =3000;
 app.listen(port, ()=>{

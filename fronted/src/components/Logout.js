@@ -1,8 +1,11 @@
-import React, {useEffect } from "react";
+import React, {useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { userContext } from '../App';
 
 
 const Logout=()=>{
+
+    const {state, dispatch} = useContext(userContext);
     const history= useHistory();
 
     useEffect(()=>{
@@ -14,6 +17,7 @@ const Logout=()=>{
             credentials: "include"
         })
         .then((res)=>{
+            dispatch({type: "USER", payload: false})
             console.log("api is working here.")
             history.push('/login')
         })
