@@ -8,14 +8,13 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Logout from './components/Logout';
 import Errorpage from './components/Error';
-import {initialState, reducer} from './reducer/useReducer'
 
+import {initialState, reducer} from './reducer/useReducer'
 export const userContext= createContext();
 
 const Routing =()=>{
   return (
     <>
-      <Navbar/>
       <Switch>
       {/* <app></app> */}
         <Route exact path="/home">
@@ -46,6 +45,7 @@ const Routing =()=>{
           <Errorpage />
         </Route>
         </Switch>
+        {/* </userContext.Provider> */}
   </>
   )
 }

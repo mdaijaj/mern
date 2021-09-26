@@ -19,7 +19,7 @@ app.use('/', user.router)
 //     res.send("dk boss")
 // })
 
-var port =3000;
+var port =5000;
 app.listen(port, ()=>{
     console.log(`server is listening this ${port}`);
 });

@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react';
-import image from '../images/kingkhan.jpg'
+import image from '../images/userprofile.png'
 import {useHistory, NavLink} from 'react-router-dom'
 import { userContext } from '../App';
 
@@ -28,7 +28,7 @@ const Login=()=>{
             window.alert("data not found")
             console.log("data not found")
         }else{
-            dispatch({type: "USER", payload: true})
+            dispatch({type:"USER", payload: true});
             window.alert("Login data successfully!")
             console.log("login success")
             history.push("/home")

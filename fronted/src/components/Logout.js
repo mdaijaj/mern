@@ -14,12 +14,15 @@ const Logout=()=>{
             headers: {
                 Accept: "application/json"
             },
-            credentials: "include"
         })
         .then((res)=>{
-            dispatch({type: "USER", payload: false})
+            console.log("res", res)
+            dispatch({type: "USER", payload: false});
             console.log("api is working here.")
-            history.push('/login')
+            history.push('/login', {replace: false});
+            if(res.status!==200){
+                console.log("err.message")
+            }
         })
         .catch((err)=>{
             console.log(err.message)
@@ -28,7 +31,7 @@ const Logout=()=>{
 
     return(
         <>
-        <h1> User logout from website </h1>
+            <h1> User logout from website </h1>
         </>
     )
 }
