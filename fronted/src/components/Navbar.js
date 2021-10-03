@@ -1,11 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import {NavLink} from 'react-router-dom';
 import React, {useState} from 'react';
-import userLogin from './Login'
 import "../App.css"  //22
 const Navbar=()=>{
 
-    console.log("userLogin", userLogin())
     const toggle="true";
     var accessTokenObj = localStorage.getItem("Token:")    
     console.log("dataStore", accessTokenObj)

@@ -181,7 +181,6 @@ const Contact=()=>{
                                 <div className="contact_form_button">
                                     <button type="submit" onClick={contactForm} className="button contact_submit_button">Sent Message</button>
                                 </div>
-
                             </form>
                         </div>
                     </div>
