@@ -21,7 +21,7 @@ const Signup=()=>{
         name= e.target.name
         value= e.target.value
         console.log("user", user)
-        setUser({...user, [name]: value})
+        setUser({...user, [name]: value})  //[] dynamic data for
     }
 
     const Postdata= async(e)=>{

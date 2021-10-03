@@ -28,7 +28,7 @@ const Login=()=>{
             window.alert("data not found")
             console.log("data not found")
         }else{
-            dispatch({type:"USER", payload: true});
+            // dispatch({type:"USER", payload: true});
             window.alert("Login data successfully!")
             console.log("login success")
             history.push("/home")
